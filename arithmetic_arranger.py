@@ -23,7 +23,6 @@ def arithmetic_arranger(problems):
     upper_line = "  "
     additional_length = None
     for problem in problems:
-      
       operand_one = problem.split()[0]
       operand_two = problem.split()[2]
       operand_one_length = len(operand_one)
@@ -37,13 +36,12 @@ def arithmetic_arranger(problems):
       upper_line = upper_line + operand_one + '      '
 
     upper_line = upper_line.rstrip() + "\n"
-    print(upper_line)
+    # print(upper_line)
 
 # Deal with the lower operands
     lower_line = ""
     additional_length = None
     for problem in problems:
-      
       operand_one = problem.split()[0]
       math_symbol = problem.split()[1]
       operand_two = problem.split()[2]
@@ -58,7 +56,29 @@ def arithmetic_arranger(problems):
       lower_line = lower_line + " " + operand_two + "    "
 
     lower_line = lower_line.rstrip() + "\n"  
-    print(lower_line)
+    # print(lower_line)
 
-    print(upper_line + lower_line)
-    return "Bottom Line Complete"
+# Deal with the dash separator
+    dash_line = '--'
+    for problem in problems:
+      operand_one = problem.split()[0]
+      operand_two = problem.split()[2]
+      operand_one_length = len(operand_one)
+      operand_two_length = len(operand_two)
+      
+      if operand_one_length >= operand_two_length:     
+        while operand_one_length > 0:
+          dash_line = dash_line + "-"
+          operand_one_length = operand_one_length - 1
+      elif operand_one_length < operand_two_length:
+        while operand_two_length > 0:
+          dash_line = dash_line + "-"
+          operand_two_length = operand_two_length - 1
+        
+      dash_line = dash_line + '    --'
+    
+    dash_line = dash_line [:len(dash_line)-6]
+    # print(dash_line)
+
+    # print(upper_line + lower_line + dash_line)
+    return upper_line + lower_line + dash_line
