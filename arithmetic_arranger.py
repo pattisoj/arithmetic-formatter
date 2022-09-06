@@ -1,7 +1,7 @@
 from optparse import OptParseError
 
 
-def arithmetic_arranger(problems):
+def arithmetic_arranger(problems, answer=False):
 # First handle the possible errors
     if len(problems) > 5:
         return "Error: Too many problems."
@@ -79,6 +79,40 @@ def arithmetic_arranger(problems):
     
     dash_line = dash_line [:len(dash_line)-6]
     # print(dash_line)
+    
+    answer_not_required = upper_line + lower_line + dash_line
+  
+  # If answers are requested solve the problems
+    answer_required = answer_not_required + "\n"
+    for problem in problems:
+      operand_one = int(problem.split()[0])
+      math_symbol = problem.split()[1]
+      operand_two = int(problem.split()[2])
+      operand_one_length = len(problem.split()[0])
+      operand_two_length = len(problem.split()[2])
 
-    # print(upper_line + lower_line + dash_line)
-    return upper_line + lower_line + dash_line
+      if operand_one_length >= operand_two_length: 
+        longest_line = math_symbol + ' ' + str(operand_one)
+        dash_length = len(longest_line)
+      elif operand_one_length < operand_two_length:
+        longest_line = math_symbol + ' ' + str(operand_two)
+        dash_length = len(longest_line)
+        
+      if math_symbol == "+":
+        solution = operand_one + operand_two
+      elif math_symbol == "-":
+        solution = operand_one - operand_two
+
+      additional_spaces = dash_length - len(str(solution))
+      spaces = ''
+      while additional_spaces > 0:
+        spaces = spaces + ' '
+        additional_spaces = additional_spaces -1
+
+      answer_required = answer_required + spaces + str(solution) + '    ' 
+    answer_required = answer_required.rstrip()
+      
+    if answer == True:
+      return answer_required
+    elif answer == False:  
+      return answer_not_required
