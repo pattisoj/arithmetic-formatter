@@ -19,6 +19,24 @@ def arithmetic_arranger(problems):
         if len(operand_one) > 4 or len(operand_two) > 4:
             return "Error: Numbers cannot be more than four digits."
         
-        
+# Deal with the upper operand
+    upper_line = "  "
+    additional_length = None
+    for problem in problems:
+      
+      operand_one = problem.split()[0]
+      operand_two = problem.split()[2]
+      operand_one_length = len(operand_one)
+      operand_two_length = len(operand_two)
+      additional_length = operand_two_length - operand_one_length
+          
+      while additional_length > 0:
+        upper_line = upper_line + " "
+        additional_length = additional_length - 1
 
-    return "Error Checking"
+      upper_line = upper_line + operand_one + '      '
+
+    upper_line = upper_line.rstrip() + "/n"
+    print(upper_line)
+
+    return "Top Line Complete"
